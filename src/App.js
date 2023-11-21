@@ -1,15 +1,23 @@
-import React, {useState, useEffect} from "react"
-import Die from "./components/Die"
-import { nanoid } from "nanoid"
-import Confetti from "react-confetti"
+import React, {useState, useEffect} from "react";
+import Die from "./components/Die";
+import { nanoid } from "nanoid";
+import Confetti from "react-confetti";
 
 export default function App(){
 
-  const [allDice, setAllDice] = useState(allNewDice)
-  const [tenzies, setTenzies] = useState(false)
-  const [rollCount, setRollCount] = useState(0)
+  // state for the allDices
+  const [allDice, setAllDice] = useState(allNewDice);
+
+  // if is tenzies over 
+  const [tenzies, setTenzies] = useState(false);
+
+  // state for the rollCount, how many times user rolls to win the game
+  const [rollCount, setRollCount] = useState(0);
+ 
+  // state for the timer
   const [timer, setTimer] = useState(0);
 
+  // Checks if all dice are held and have the same value; sets 'tenzies' state accordingly
   useEffect (() => {
     const allHeld = allDice.every(die => die.isHeld)
     const firstValue = allDice[0].value
@@ -19,6 +27,7 @@ export default function App(){
     }
   }, [allDice])
 
+  // Manages the timer interval based on the 'tenzies' state
   useEffect(() => {
     let intervalId;
 
@@ -35,7 +44,7 @@ export default function App(){
     };
   }, [tenzies]);
 
-
+  // Generates a new die object with a random value, not held, and a unique id
   function generateNewDie() {
     return {
         value: Math.ceil(Math.random() * 6),
@@ -44,6 +53,7 @@ export default function App(){
     }
   }
 
+  // Generates an array of 10 new dice using the 'generateNewDie' function
   function allNewDice() {
     const newDice = []
     for(let i = 0; i < 10; i++){
@@ -52,8 +62,10 @@ export default function App(){
     return newDice
   }
 
+  // Maps the 'allDice' array to JSX elements representing the Dice component
   const diceElements = allDice.map(die => <Die key={die.id} value={die.value} isHeld={die.isHeld} holdDice={() => holdDice(die.id)}/>)
 
+  // Updates the dice based on 'tenzies' state and increments the roll count
   function getNewDice(){
     if (!tenzies){
       setAllDice(oldDice => oldDice.map(die => {
@@ -68,6 +80,7 @@ export default function App(){
     }
   }
 
+  // Toggles the 'isHeld' property of a specific die based on its 'id'
   function holdDice(id){
     setAllDice(prevState => prevState.map(die => {
         return die.id === id ? {...die, isHeld: !die.isHeld} : die
