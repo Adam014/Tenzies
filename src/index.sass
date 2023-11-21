@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Mooli&display=swap')
+
+*
+    margin:0
+    padding: 0
+    box-sizing: border-box
+    font-family: 'Mooli', sans-serif
+
+$background: #1F2426
+$white: white
+
+@mixin grid-center()
+    display: grid
+    justify-content: center
+
+@mixin flex-center()
+    display: flex
+    justify-content: center
+    align-items: center
+
+body
+    background-color: $background
+
+main   
+    width: 80%
+    background-color: $white
+    @include grid-center()
+    height: 95vh
+    border-radius: 40px
+
+#root
+    @include flex-center()
+    height: 100vh
+
+h1
+    font-size: 3rem
+    text-align: center
+    padding-top: 20px
+    position: relative
+    top: 30%
+
+.p-container
+
+    @include flex-center()
+    text-align: center
+
+    p
+        font-size: 2rem
+        opacity: 0.7
+        width: 50%  
+    
+
+.dies
+
+    display: grid
+    grid-template: auto auto / repeat(5, 0fr)
+    width: 100%
+    justify-content: center
+
+    .die
+        height: 6rem
+        width: 6rem
+        box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.3)
+        align-items: center
+        display: flex
+        justify-content: center
+        margin: 30px
+        cursor: pointer
+        border-radius: 10px
+
+    .die-green
+        @extend .die
+        background-color: green
+        color: white
+
+.button
+    @include flex-center()
+    width: 100%
+
+    button
+        width: 8rem
+        height: 3rem
+        background-color: rgba(80, 53, 255, 1)
+        color: $white
+        border-radius: 10px
+        cursor: pointer
+        border: 0
+
+.stats
+    @include flex-center()
+    font-size: 1.5rem
+    h4  
+        padding: 10px
