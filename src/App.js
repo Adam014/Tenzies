@@ -5,9 +5,6 @@ import Confetti from "react-confetti"
 
 export default function App(){
 
-
-  // cas co trvalo nez user vyhral a zobrazit oboji
-
   const [allDice, setAllDice] = useState(allNewDice)
   const [tenzies, setTenzies] = useState(false)
   const [rollCount, setRollCount] = useState(0)
